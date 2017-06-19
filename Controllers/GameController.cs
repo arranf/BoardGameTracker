@@ -36,7 +36,7 @@ namespace BoardGameTracker.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create([FromBody] Game item)
+        public IActionResult Create([Bind("Title")] Game item)
         {
             if (item == null)
             {
@@ -50,7 +50,7 @@ namespace BoardGameTracker.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult Update(long id, [FromBody] Game item)
+        public IActionResult Update(long id, [Bind("Title")] Game item)
         {
             if (item == null || item.Id != id)
             {
