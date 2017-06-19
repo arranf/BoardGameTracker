@@ -24,7 +24,7 @@ namespace BoardGameTracker.Controllers
            return _context.Games.ToList();
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id}", Name = "GetGame")]
         public IActionResult GetGame(long id)
         {
             var item = _context.Games.FirstOrDefault(t => t.Id == id);
@@ -33,6 +33,55 @@ namespace BoardGameTracker.Controllers
                 return NotFound();
             }
             return new ObjectResult(item);
+        }
+
+        [HttpPost]
+        public IActionResult Create([FromBody] Game item)
+        {
+            if (item == null)
+            {
+                return BadRequest();
+            }
+
+            _context.Games.Add(item);
+            _context.SaveChanges();
+
+            return CreatedAtRoute("GetGame", new { id = item.Id }, item);
+        }
+
+        [HttpPut("{id}")]
+        public IActionResult Update(long id, [FromBody] Game item)
+        {
+            if (item == null || item.Id != id)
+            {
+                return BadRequest();
+            }
+
+            var game = _context.Games.FirstOrDefault(t => t.Id == id);
+            if (game == null)
+            {
+                return NotFound();
+            }
+
+            game.Title = item.Title;
+
+            _context.Games.Update(game);
+            _context.SaveChanges();
+            return new NoContentResult();
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete(long id)
+        {
+            var game = _context.Games.First(t => t.Id == id);
+            if (game == null)
+            {
+                return NotFound();
+            }
+
+            _context.Games.Remove(game);
+            _context.SaveChanges();
+            return new NoContentResult();
         }
     }
 }
