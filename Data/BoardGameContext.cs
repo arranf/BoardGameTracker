@@ -5,7 +5,7 @@ namespace BoardGameTracker.Data {
     public class BoardGameContext : DbContext
     {
         public DbSet<Game> Games { get; set; }
-        public DbSet<Purchase> Purchase { get; set; }
+        public DbSet<Purchase> Purchases { get; set; }
 
         public DbSet<User> Users {get; set;}
 

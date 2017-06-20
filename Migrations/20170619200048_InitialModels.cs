@@ -35,7 +35,7 @@ namespace BoardGameTracker.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Purchase",
+                name: "Purchases",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -46,15 +46,15 @@ namespace BoardGameTracker.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Purchase", x => x.Id);
+                    table.PrimaryKey("PK_Purchases", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Purchase_Games_GameId",
+                        name: "FK_Purchases_Games_GameId",
                         column: x => x.GameId,
                         principalTable: "Games",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Purchase_Users_UserId",
+                        name: "FK_Purchases_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id",
@@ -62,13 +62,13 @@ namespace BoardGameTracker.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Purchase_GameId",
-                table: "Purchase",
+                name: "IX_Purchases_GameId",
+                table: "Purchases",
                 column: "GameId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Purchase_UserId",
-                table: "Purchase",
+                name: "IX_Purchases_UserId",
+                table: "Purchases",
                 column: "UserId");
         }
 

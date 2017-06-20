@@ -45,7 +45,7 @@ namespace BoardGameTracker.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Purchase");
+                    b.ToTable("Purchases");
                 });
 
             modelBuilder.Entity("BoardGameTracker.Models.User", b =>
