@@ -36,23 +36,25 @@ namespace BoardGameTracker.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create([Bind("Title")] Game item)
+        public IActionResult Create([FromBody] Game item)
         {
             if (item == null)
             {
                 return BadRequest();
             }
 
-            _context.Games.Add(item);
+
+            var game = new Game {Title = item.Title};
+            _context.Games.Add(game);
             _context.SaveChanges();
 
-            return CreatedAtRoute("GetGame", new { id = item.Id }, item);
+            return CreatedAtRoute("GetGame", new { id = game.Id }, game);
         }
 
         [HttpPut("{id}")]
-        public IActionResult Update(long id, [Bind("Title")] Game item)
+        public IActionResult Update(long id, [FromBody] Game item)
         {
-            if (item == null || item.Id != id)
+            if (item == null)
             {
                 return BadRequest();
             }
