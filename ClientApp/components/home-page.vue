@@ -24,15 +24,23 @@
             <li><strong>Efficient production builds</strong>. In production mode, development-time features are disabled,
                 and the <code>webpack</code> build tool produces minified static CSS and JavaScript files.</li>
         </ul>
+
+         <board-game-finder></board-game-finder>
     </div>
 </template>
 
 <script>
+
+import BoardGameFinder from './board-game-finder'
+
 export default {
+    components: {
+        BoardGameFinder
+    },
     data() {
         return {
         }
-    },
+    }
 }
 </script>
 
