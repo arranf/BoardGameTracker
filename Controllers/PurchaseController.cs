@@ -43,8 +43,8 @@ namespace BoardGameTracker.Controllers
                 return BadRequest();
             }
 
-            // Check UserId exists
-            if (_context.Users.FirstOrDefault(u => u.Id == item.UserId) == null) {
+            // Check AccountId exists
+            if (_context.Accounts.FirstOrDefault(u => u.Id == item.AccountId) == null) {
                 return BadRequest();
             }
             
@@ -65,7 +65,7 @@ namespace BoardGameTracker.Controllers
             var purchase = new Purchase();
             purchase.Amount = item.Amount;
             purchase.GameId = game.Id;
-            purchase.UserId = item.UserId;
+            purchase.AccountId = item.AccountId;
 
             _context.Purchases.Add(item);
             _context.SaveChanges();
@@ -74,7 +74,7 @@ namespace BoardGameTracker.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult Update(long id, [Bind("GameId", "UserId", "Amount")] Purchase item)
+        public IActionResult Update(long id, [Bind("GameId", "AccountId", "Amount")] Purchase item)
         {
             if (item == null || item.Id != id)
             {
@@ -88,7 +88,7 @@ namespace BoardGameTracker.Controllers
             }
 
             purchase.GameId = item.GameId;
-            purchase.UserId = item.UserId;
+            purchase.AccountId = item.AccountId;
             purchase.Amount = item.Amount;
 
             _context.Purchases.Update(purchase);

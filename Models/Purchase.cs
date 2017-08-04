@@ -5,13 +5,13 @@ namespace BoardGameTracker.Models {
         public int Id {get; set;}
         public int GameId {get; set;}
         [Required]
-        public int UserId {get; set;}
+        public int AccountId {get; set;}
 
         [Required]
         [Range(1, double.MaxValue, ErrorMessage = "Please enter a value bigger than {1}")]
         public double Amount {get; set;}
 
         public Game Game {get; set;}
-        public User User {get; set;}
+        public Account Account {get; set;}
     }
 }

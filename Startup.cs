@@ -8,7 +8,10 @@ using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using BoardGameTracker.Data;
+using BoardGameTracker.Security;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 
 namespace BoardGameTracker
 {
@@ -32,6 +35,8 @@ namespace BoardGameTracker
             // Add framework services.
             services.AddMvc();
             services.AddEntityFrameworkSqlite().AddDbContext<BoardGameContext>();
+            services.Configure<JWTSettings>(Configuration.GetSection("JWTSettings"));
+            services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<BoardGameContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -65,6 +70,8 @@ namespace BoardGameTracker
                     name: "spa-fallback",
                     defaults: new { controller = "Home", action = "Index" });
             });
+
+            app.UseIdentity();
         }
     }
 }
